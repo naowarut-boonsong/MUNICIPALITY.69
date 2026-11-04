@@ -4,813 +4,354 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>360° Virtual Tour | มหาวิทยาลัยราชภัฏศรีสะเกษ</title>
-
+<title>360° Virtual Tour | อาคารสำนักงานเทศบาล</title>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-:root {
-  --primary: #176b45;
-  --primary-dark: #104d32;
-  --accent: #d6aa43;
-  --bg: #f4f7f5;
-  --card: #ffffff;
-  --text: #26352d;
-  --muted: #68766e;
-  --border: #dce5df;
-  --radius: 16px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: 'Prompt', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 16px;
-  transition: .2s;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-/* HEADER */
-.header {
-  background: linear-gradient(120deg,var(--primary-dark),var(--primary));
-  color: white;
-  padding: 25px 5%;
-}
-
-.header-content {
-  max-width: 1400px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.brand-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: rgba(255,255,255,.15);
-  display: grid;
-  place-items: center;
-  font-size: 25px;
-}
-
-.brand h1 {
-  font-size: 20px;
-  margin: 0;
-}
-
-.brand p {
-  font-size: 12px;
-  margin: 4px 0 0;
-  opacity: .85;
-}
-
-.header-label {
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: #f5dfab;
-}
-
-/* ACCESSIBILITY */
-.accessibility {
-  max-width: 1400px;
-  margin: 20px auto 0;
-  padding: 0 20px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.accessibility button {
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
-  padding: 9px 14px;
-  border-radius: 9px;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.accessibility button:hover,
-.accessibility button:focus-visible {
-  border-color: var(--primary);
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-/* MAIN LAYOUT */
-.container {
-  width: min(1400px, 94%);
-  margin: 25px auto;
-}
-
-.section-heading {
-  margin-bottom: 20px;
-}
-
-.section-heading h2 {
-  margin: 0;
-  font-size: 25px;
-  color: var(--primary-dark);
-}
-
-.section-heading p {
-  color: var(--muted);
-  margin: 5px 0;
-  font-size: 14px;
-}
-
-.tour-layout {
-  display: grid;
-  grid-template-columns: 290px minmax(0,1fr);
-  gap: 20px;
-  align-items: start;
-}
-
-/* SIDEBAR */
-.sidebar {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-}
-
-.sidebar h3 {
-  font-size: 18px;
-  margin: 0 0 16px;
-}
-
-.category-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-  margin: 20px 0 9px;
-}
-
-.tour-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  text-align: left;
-  padding: 12px;
-  margin-bottom: 7px;
-  border: 1px solid transparent;
-  background: transparent;
-  border-radius: 10px;
-  color: var(--text);
-  font-size: 14px;
-  transition: .2s;
-}
-
-.tour-btn:hover {
-  background: #edf5ef;
-}
-
-.tour-btn.active {
-  background: #e5f2e9;
-  border-color: var(--primary);
-  color: var(--primary-dark);
-  font-weight: 600;
-}
-
-.tour-btn:focus-visible {
-  outline: 3px solid var(--accent);
-}
-
-.tour-btn i {
-  width: 20px;
-  text-align: center;
-}
-
-/* VIEWER */
-.viewer-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  min-width: 0;
-}
-
-.viewer-header {
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.viewer-header h3 {
-  font-size: 17px;
-  margin: 0;
-}
-
-.live-label {
-  color: var(--primary);
-  background: #e5f5e9;
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-}
-
-.viewer-area {
-  position: relative;
-  width: 100%;
-  height: 560px;
-  background: #18231d;
-}
-
-#tour-frame {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-
-/* MINI MAP */
-.minimap {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 190px;
-  height: 165px;
-  z-index: 5;
-  border: 2px solid white;
-  border-radius: 12px;
-  overflow: hidden;
-  background: white;
-  box-shadow: 0 5px 20px rgba(0,0,0,.25);
-}
-
-.minimap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.map-marker {
-  position: absolute;
-  transform: translate(-50%,-50%);
-  width: 25px;
-  height: 25px;
-  border: 3px solid white;
-  background: #e53935;
-  border-radius: 50%;
-  box-shadow: 0 0 0 5px rgba(229,57,53,.25);
-  z-index: 3;
-}
-
-.map-point {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid white;
-  background: var(--primary);
-  color: white;
-  font-size: 11px;
-  display: grid;
-  place-items: center;
-  transform: translate(-50%,-50%);
-  z-index: 2;
-  padding: 0;
-}
-
-.map-point:hover,
-.map-point:focus-visible {
-  background: var(--accent);
-  color: #17251b;
-  outline: 2px solid white;
-  outline-offset: 2px;
-}
-
-.map-point.active {
-  background: #e53935;
-  transform: translate(-50%,-50%) scale(1.2);
-}
-
-.map-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 5px;
-  text-align: center;
-  background: rgba(0,0,0,.7);
-  color: white;
-  font-size: 10px;
-  pointer-events: none;
-}
-
-/* INFO */
-.info-card {
-  padding: 20px;
-  border-top: 1px solid var(--border);
-}
-
-.info-card h3 {
-  margin: 0 0 7px;
-  color: var(--primary-dark);
-}
-
-.info-card p {
-  margin: 0;
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.8;
-}
-
-/* MAP SECTION */
-.map-section {
-  margin-top: 25px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-}
-
-.map-section h3 {
-  margin-top: 0;
-}
-
-.map-section p {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.map-guide {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* CONTRAST */
-body.high-contrast {
-  --bg: #000;
-  --card: #101010;
-  --text: #fff;
-  --muted: #fff;
-  --border: #ff0;
-  --primary: #ff0;
-  --primary-dark: #ff0;
-}
-
-body.high-contrast .header {
-  background: #000;
-  border-bottom: 2px solid yellow;
-}
-
-body.high-contrast .tour-btn.active,
-body.high-contrast .accessibility button {
-  background: #ff0;
-  color: #000;
-}
-
-body.high-contrast .section-heading h2,
-body.high-contrast .info-card h3 {
-  color: #ff0;
-}
-
-/* FOOTER */
-footer {
-  background: var(--primary-dark);
-  color: white;
-  padding: 25px;
-  text-align: center;
-  font-size: 13px;
-  margin-top: 40px;
-}
-
-/* RESPONSIVE */
-@media(max-width:850px) {
-  .tour-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    padding: 16px;
-  }
-
-  .viewer-area {
-    height: 480px;
-  }
-}
-
-@media(max-width:550px) {
-  .header-content {
-    align-items: flex-start;
-  }
-
-  .brand h1 {
-    font-size: 16px;
-  }
-
-  .header-label {
-    display: none;
-  }
-
-  .accessibility {
-    justify-content: center;
-  }
-
-  .accessibility button {
-    padding: 9px 11px;
-  }
-
-  .section-heading h2 {
-    font-size: 20px;
-  }
-
-  .viewer-area {
-    height: 430px;
-  }
-
-  .minimap {
-    width: 125px;
-    height: 115px;
-    top: 10px;
-    right: 10px;
-  }
-
-  .container {
-    width: 94%;
-  }
-}
+:root{--primary:#176b45;--primary-dark:#104d32;--accent:#d6aa43;--bg:#f4f7f5;--card:#fff;--text:#26352d;--muted:#68766e;--border:#dce5df;--radius:16px}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Prompt',sans-serif;background:var(--bg);color:var(--text);font-size:16px;transition:.2s}
+button,input{font-family:inherit}button{cursor:pointer}
+.header{background:linear-gradient(120deg,var(--primary-dark),var(--primary));color:white;padding:25px 5%}
+.header-content{max-width:1400px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-icon{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:25px}
+.brand h1{font-size:20px;margin:0}.brand p{font-size:12px;margin:4px 0 0;opacity:.85}
+.header-label{font-size:12px;letter-spacing:1px;color:#f5dfab}
+.accessibility{max-width:1400px;margin:20px auto 0;padding:0 20px;display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:8px}
+.accessibility button{border:1px solid var(--border);background:var(--card);color:var(--text);padding:9px 14px;border-radius:9px;font-size:14px;font-weight:500}
+.accessibility button:hover,.accessibility button:focus-visible{border-color:var(--primary);outline:2px solid var(--primary);outline-offset:2px}
+.container{width:min(1400px,94%);margin:25px auto}
+.section-heading{margin-bottom:20px}.section-heading h2{margin:0;font-size:25px;color:var(--primary-dark)}
+.section-heading p{color:var(--muted);margin:5px 0;font-size:14px}
+.tour-layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:20px;align-items:start}
+.sidebar{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.sidebar h3{font-size:18px;margin:0 0 16px}
+.search-box{position:relative;margin-bottom:12px}.search-box i{position:absolute;left:12px;top:13px;color:var(--muted)}
+.search-box input{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);font-size:13px}
+.category-title{font-size:13px;font-weight:600;color:var(--muted);margin:20px 0 9px}
+.tour-btn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:12px;margin-bottom:7px;border:1px solid transparent;background:transparent;border-radius:10px;color:var(--text);font-size:14px;transition:.2s}
+.tour-btn:hover{background:#edf5ef}.tour-btn.active{background:#e5f2e9;border-color:var(--primary);color:var(--primary-dark);font-weight:600}
+.tour-btn:focus-visible{outline:3px solid var(--accent)}.tour-btn i{width:20px;text-align:center}
+.viewer-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;min-width:0}
+.viewer-header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.viewer-header h3{font-size:17px;margin:0}.live-label{color:var(--primary);background:#e5f5e9;padding:5px 10px;border-radius:20px;font-size:11px}
+.viewer-area{position:relative;width:100%;height:560px;background:#18231d}
+#tour-frame{width:100%;height:100%;border:0;display:block}
+.viewer-placeholder{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:white;padding:30px;gap:12px}
+.viewer-placeholder i{font-size:48px;color:var(--accent)}.viewer-placeholder p{max-width:500px;color:#e5eee8;font-size:13px;line-height:1.8;margin:0}
+.minimap{position:absolute;top:15px;right:15px;width:190px;height:165px;z-index:5;border:2px solid white;border-radius:12px;overflow:hidden;background:white;box-shadow:0 5px 20px rgba(0,0,0,.25)}
+.minimap img{width:100%;height:100%;object-fit:cover;display:block}
+.map-point{position:absolute;width:24px;height:24px;border-radius:50%;border:2px solid white;background:var(--primary);color:white;font-size:11px;display:grid;place-items:center;transform:translate(-50%,-50%);z-index:2;padding:0}
+.map-point:hover,.map-point:focus-visible{background:var(--accent);color:#17251b;outline:2px solid white;outline-offset:2px}
+.map-point.active{background:#e53935;transform:translate(-50%,-50%) scale(1.2)}
+.map-caption{position:absolute;left:0;right:0;bottom:0;padding:5px;text-align:center;background:rgba(0,0,0,.7);color:white;font-size:10px;pointer-events:none}
+.info-card{padding:20px;border-top:1px solid var(--border)}
+.info-card h3{margin:0 0 7px;color:var(--primary-dark)}
+.info-card>p{margin:0;font-size:14px;color:var(--muted);line-height:1.8}
+.detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.detail-item{background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:12px}
+.detail-item h4{font-size:13px;margin:0 0 6px;color:var(--primary-dark)}
+.detail-item p{font-size:12px;line-height:1.7;margin:0;color:var(--muted);white-space:pre-line}
+.map-section{margin-top:25px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.map-section h3{margin-top:0}.map-section p{color:var(--muted);font-size:13px}
+.map-guide{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--muted)}
+.note{font-size:12px;line-height:1.7;color:var(--muted);margin-top:12px}
+body.high-contrast{--bg:#000;--card:#101010;--text:#fff;--muted:#fff;--border:#ff0;--primary:#ff0;--primary-dark:#ff0}
+body.high-contrast .header{background:#000;border-bottom:2px solid yellow}
+body.high-contrast .tour-btn.active,body.high-contrast .accessibility button{background:#ff0;color:#000}
+body.high-contrast .section-heading h2,body.high-contrast .info-card h3,body.high-contrast .detail-item h4{color:#ff0}
+footer{background:var(--primary-dark);color:white;padding:25px;text-align:center;font-size:13px;margin-top:40px}
+@media(max-width:850px){.tour-layout{grid-template-columns:1fr}.sidebar{padding:16px}.viewer-area{height:480px}.detail-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:550px){.header-content{align-items:flex-start}.brand h1{font-size:16px}.header-label{display:none}.accessibility{justify-content:center}.accessibility button{padding:9px 11px}.section-heading h2{font-size:20px}.viewer-area{height:430px}.minimap{width:125px;height:115px;top:10px;right:10px}.container{width:94%}.detail-grid{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
-
 <header class="header">
   <div class="header-content">
     <div class="brand">
-      <div class="brand-icon">
-        <i class="fa-solid fa-building-columns"></i>
-      </div>
+      <div class="brand-icon"><i class="fa-solid fa-building-columns"></i></div>
       <div>
-        <h1>มหาวิทยาลัยราชภัฏศรีสะเกษ</h1>
-        <p>Sisaket Rajabhat University</p>
+        <h1 id="office-name">อาคารสำนักงานเทศบาล</h1>
+        <p>360° Virtual Tour | Municipal Office</p>
       </div>
     </div>
-    <div class="header-label">360° VIRTUAL CAMPUS TOUR</div>
+    <div class="header-label">360° VIRTUAL OFFICE TOUR</div>
   </div>
 </header>
 
-<!-- ACCESSIBILITY -->
 <div class="accessibility">
   <span>ปรับขนาดตัวอักษร</span>
   <button onclick="changeFont(-1)" aria-label="ลดขนาดตัวอักษร">A-</button>
   <button onclick="changeFont(0)">ปกติ</button>
   <button onclick="changeFont(1)" aria-label="เพิ่มขนาดตัวอักษร">A+</button>
   <button onclick="toggleContrast()" aria-pressed="false" id="contrastBtn">
-    <i class="fa-solid fa-circle-half-stroke"></i>
-    เพิ่มความคมชัด
+    <i class="fa-solid fa-circle-half-stroke"></i> เพิ่มความคมชัด
   </button>
 </div>
 
 <main class="container">
-
   <div class="section-heading">
-    <h2><i class="fa-solid fa-vr-cardboard"></i> ทัวร์เสมือนจริง 360 องศา</h2>
-    <p>สัมผัสบรรยากาศและสำรวจสถานที่ภายในมหาวิทยาลัยผ่านเทคโนโลยีภาพเสมือนจริง</p>
+    <h2><i class="fa-solid fa-vr-cardboard"></i> ทัวร์เสมือนจริง 360 องศา อาคารสำนักงาน</h2>
+    <p>สำรวจจุดให้บริการประชาชนและศึกษาข้อมูลเบื้องต้นก่อนเดินทางมาติดต่อ</p>
   </div>
 
   <div class="tour-layout">
-
-    <!-- SIDEBAR -->
     <aside class="sidebar">
-      <h3><i class="fa-solid fa-map-location-dot"></i> เลือกสถานที่</h3>
-
+      <h3><i class="fa-solid fa-map-location-dot"></i> เลือกจุดบริการ</h3>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" id="service-search" placeholder="ค้นหาห้องหรือบริการ..." aria-label="ค้นหาห้องหรือบริการ">
+      </div>
       <div id="tour-menu"></div>
     </aside>
 
-    <!-- VIEWER -->
     <section class="viewer-card">
-
       <div class="viewer-header">
-        <h3 id="scene-title">กำลังโหลดสถานที่...</h3>
-        <span class="live-label">
-          <i class="fa-solid fa-circle"></i> 360° TOUR
-        </span>
+        <h3 id="scene-title">เลือกจุดบริการ</h3>
+        <span class="live-label"><i class="fa-solid fa-circle"></i> 360° TOUR</span>
       </div>
 
       <div class="viewer-area">
-
-        <iframe
-          id="tour-frame"
-          title="ภาพทัวร์เสมือนจริง 360 องศา"
-          allowfullscreen
-          allow="fullscreen; gyroscope; accelerometer"
-          loading="lazy">
-        </iframe>
-
-        <!-- INTERACTIVE MINI MAP -->
-        <div class="minimap" id="minimap">
-          <img
-            src="assets/campus-map.jpg"
-            alt="แผนที่แสดงตำแหน่งสถานที่ภายในมหาวิทยาลัย"
-            onerror="this.style.display='none'; document.getElementById('map-fallback').style.display='grid';">
-
-          <div id="map-fallback" style="
-            display:none; position:absolute; inset:0;
-            place-items:center; text-align:center;
-            background:#edf5ef; color:#176b45; padding:10px;
-            font-size:12px;">
-            กรุณาเพิ่มภาพแผนที่ campus-map.jpg
-          </div>
-
-          <div id="map-points"></div>
-          <div class="map-caption">แผนที่เลือกสถานที่</div>
+        <div class="viewer-placeholder" id="viewer-placeholder">
+          <i class="fa-solid fa-panorama"></i>
+          <strong>ภาพทัวร์เสมือนจริง 360 องศา</strong>
+          <p>เลือกจุดบริการจากเมนู หรือหมายเลขบนแผนผัง เพื่อเริ่มต้นเข้าชม</p>
         </div>
+        <iframe id="tour-frame" title="ภาพทัวร์เสมือนจริง 360 องศา" allowfullscreen allow="fullscreen; gyroscope; accelerometer" loading="lazy" style="display:none"></iframe>
 
+        <div class="minimap" id="minimap">
+          <img src="assets/office-map.jpg" alt="แผนผังตำแหน่งจุดบริการภายในอาคารสำนักงาน"
+            onerror="this.style.display='none';document.getElementById('map-fallback').style.display='grid';">
+          <div id="map-fallback" style="display:none;position:absolute;inset:0;place-items:center;text-align:center;background:#edf5ef;color:#176b45;padding:10px;font-size:12px">
+            กรุณาเพิ่มภาพแผนผัง<br>office-map.jpg
+          </div>
+          <div id="map-points"></div>
+          <div class="map-caption">แผนผังจุดบริการ</div>
+        </div>
       </div>
 
       <div class="info-card">
-        <h3 id="info-title">ข้อมูลสถานที่</h3>
-        <p id="info-description">
-          เลือกสถานที่จากเมนูเพื่อเริ่มต้นการเข้าชม
-        </p>
+        <h3 id="info-title">ข้อมูลจุดบริการ</h3>
+        <p id="info-description">เลือกจุดบริการเพื่อดูรายละเอียด</p>
+        <div class="detail-grid">
+          <div class="detail-item">
+            <h4><i class="fa-solid fa-file-lines"></i> เอกสารที่ควรเตรียม</h4>
+            <p id="info-documents">กรุณาเลือกจุดบริการ</p>
+          </div>
+          <div class="detail-item">
+            <h4><i class="fa-solid fa-list-check"></i> ขั้นตอนการติดต่อ</h4>
+            <p id="info-steps">กรุณาเลือกจุดบริการ</p>
+          </div>
+          <div class="detail-item">
+            <h4><i class="fa-solid fa-location-dot"></i> ตำแหน่ง / เวลาบริการ</h4>
+            <p id="info-location">กรุณาเลือกจุดบริการ</p>
+          </div>
+        </div>
       </div>
-
     </section>
-
   </div>
 
-  <!-- MAP GUIDE -->
   <section class="map-section">
     <h3><i class="fa-solid fa-location-crosshairs"></i> วิธีใช้งานระบบ</h3>
     <div class="map-guide">
-      <span><i class="fa-solid fa-hand-pointer"></i> คลิกเมนูเพื่อเลือกสถานที่</span>
-      <span><i class="fa-solid fa-map"></i> คลิกหมายเลขบนแผนที่เพื่อเปลี่ยนจุดชม</span>
+      <span><i class="fa-solid fa-hand-pointer"></i> คลิกเมนูเพื่อเลือกจุดบริการ</span>
+      <span><i class="fa-solid fa-map"></i> คลิกหมายเลขบนแผนผังเพื่อเปลี่ยนจุดชม</span>
       <span><i class="fa-solid fa-arrows-rotate"></i> ลากภาพเพื่อหมุนมุมมอง 360°</span>
       <span><i class="fa-solid fa-magnifying-glass-plus"></i> ใช้เมาส์หรือสัมผัสเพื่อซูม</span>
     </div>
+    <p class="note">หมายเหตุ: ข้อมูลเอกสาร ขั้นตอน ตำแหน่ง และเวลาทำการเป็นข้อมูลตัวอย่าง โปรดตรวจสอบกับหน่วยงานและแก้ไขให้ตรงกับบริการจริงก่อนเผยแพร่</p>
   </section>
-
 </main>
 
 <footer>
-  <strong>มหาวิทยาลัยราชภัฏศรีสะเกษ</strong>
-  <p>360° Virtual Tour | Sisaket Rajabhat University</p>
+  <strong id="footer-office-name">อาคารสำนักงานเทศบาล</strong>
+  <p>360° Virtual Tour | Municipal Office</p>
 </footer>
 
 <script>
-
-// =====================================================
-// 1. CAMPUS SCENE DATABASE
-// =====================================================
-
-// แก้ไขชื่อสถานที่ คำอธิบาย และ Scene ID ให้ตรงกับ ThingLink จริง
-// ตำแหน่ง x,y เป็นเปอร์เซ็นต์บนภาพแผนที่
+const OFFICE_NAME = "อาคารสำนักงานเทศบาล";
+document.getElementById("office-name").textContent = OFFICE_NAME;
+document.getElementById("footer-office-name").textContent = OFFICE_NAME;
 
 const scenes = [
   {
-    id: "start",
-    category: "จุดเริ่มต้น",
-    name: "จุดเริ่มต้นมหาวิทยาลัย",
-    description: "จุดเริ่มต้นสำหรับการสำรวจบรรยากาศและสถานที่ภายในมหาวิทยาลัยราชภัฏศรีสะเกษ",
-    thinglinkId: "2157062321090855780",
-    x: 50,
-    y: 50,
-    icon: "fa-location-dot"
+    id:"information",
+    category:"ประชาสัมพันธ์และรับเรื่อง",
+    name:"จุดประชาสัมพันธ์ / รับเรื่อง",
+    description:"จุดติดต่อสอบถามข้อมูลเบื้องต้น รับคำแนะนำเกี่ยวกับหน่วยงานและขั้นตอนการติดต่อราชการ",
+    documents:"เอกสารที่เกี่ยวข้องกับเรื่องที่ต้องการติดต่อ (ถ้ามี)\nบัตรประจำตัวประชาชน (กรณีจำเป็น)",
+    steps:"1. แจ้งเรื่องที่ต้องการติดต่อ\n2. รับคำแนะนำหรือบัตรคิว (ถ้ามี)\n3. ติดต่อเจ้าหน้าที่หรือหน่วยงานที่เกี่ยวข้อง",
+    location:"ตำแหน่ง: แก้ไขตามอาคาร/ชั้นจริง\nเวลาบริการ: ระบุเวลาทำการจริง",
+    thinglinkId:"",
+    x:50,y:18,icon:"fa-circle-info"
   },
-
   {
-    id: "academic",
-    category: "อาคารและสถานศึกษา",
-    name: "อาคารเรียน",
-    description: "ข้อมูลอาคารเรียนและพื้นที่สำหรับการจัดการเรียนการสอน",
-    thinglinkId: "",
-    x: 35,
-    y: 30,
-    icon: "fa-building"
+    id:"civil",
+    category:"งานทะเบียนและบัตร",
+    name:"งานทะเบียนราษฎร / บัตรประจำตัว",
+    description:"จุดให้บริการด้านทะเบียนราษฎรและบัตรประจำตัวประชาชน เช่น งานแจ้งเกิด แจ้งตาย ย้ายที่อยู่ หรือบริการอื่นตามอำนาจหน้าที่ของหน่วยงาน",
+    documents:"บัตรประจำตัวประชาชน\nเอกสารประกอบตามประเภทคำร้อง\nตรวจสอบรายการเอกสารกับเจ้าหน้าที่",
+    steps:"1. แจ้งประเภทบริการที่ต้องการ\n2. ยื่นเอกสารให้เจ้าหน้าที่ตรวจสอบ\n3. ดำเนินการตามขั้นตอนของงานทะเบียน",
+    location:"ตำแหน่ง: แก้ไขตามอาคาร/ชั้นจริง\nเวลาบริการ: ระบุเวลาทำการจริง",
+    thinglinkId:"",
+    x:28,y:38,icon:"fa-id-card"
   },
-
   {
-    id: "office",
-    category: "อาคารและสถานศึกษา",
-    name: "อาคารสำนักงาน",
-    description: "พื้นที่สำหรับการดำเนินงานและให้บริการด้านต่าง ๆ ของมหาวิทยาลัย",
-    thinglinkId: "",
-    x: 68,
-    y: 32,
-    icon: "fa-landmark"
+    id:"revenue",
+    category:"ภาษีและรายได้",
+    name:"งานจัดเก็บภาษี / รายได้",
+    description:"จุดให้บริการข้อมูลและดำเนินงานเกี่ยวกับภาษีและรายได้ของท้องถิ่น",
+    documents:"บัตรประจำตัวประชาชน\nเอกสารเกี่ยวกับทรัพย์สินหรือรายการภาษี (ตามกรณี)\nเอกสารอื่นตามที่เจ้าหน้าที่แจ้ง",
+    steps:"1. แจ้งประเภทภาษีหรือเรื่องที่ต้องการติดต่อ\n2. ยื่นเอกสารให้เจ้าหน้าที่ตรวจสอบ\n3. ดำเนินการชำระหรือรับคำแนะนำ",
+    location:"ตำแหน่ง: แก้ไขตามอาคาร/ชั้นจริง\nเวลาบริการ: ระบุเวลาทำการจริง",
+    thinglinkId:"",
+    x:72,y:38,icon:"fa-file-invoice-dollar"
   },
-
   {
-    id: "faculty",
-    category: "อาคารและสถานศึกษา",
-    name: "อาคารคณะ",
-    description: "พื้นที่จัดการเรียนการสอนและกิจกรรมของคณะต่าง ๆ",
-    thinglinkId: "",
-    x: 35,
-    y: 70,
-    icon: "fa-school"
+    id:"public-works",
+    category:"งานช่างและสาธารณูปโภค",
+    name:"งานช่าง / โครงสร้างพื้นฐาน",
+    description:"จุดติดต่อเกี่ยวกับงานสาธารณูปโภคและโครงสร้างพื้นฐาน เช่น ถนน ไฟฟ้าสาธารณะ และทางระบายน้ำ",
+    documents:"รายละเอียดสถานที่หรือจุดที่พบปัญหา\nภาพถ่ายประกอบ (ถ้ามี)\nชื่อและช่องทางติดต่อกลับ",
+    steps:"1. แจ้งประเภทปัญหาและสถานที่\n2. ให้ข้อมูลประกอบแก่เจ้าหน้าที่\n3. รับเลขรับเรื่องหรือช่องทางติดตาม (ถ้ามี)",
+    location:"ตำแหน่ง: แก้ไขตามอาคาร/ชั้นจริง\nเวลาบริการ: ระบุเวลาทำการจริง",
+    thinglinkId:"",
+    x:28,y:72,icon:"fa-screwdriver-wrench"
   },
-
   {
-    id: "landmark",
-    category: "สถานที่สำคัญ",
-    name: "จุดแลนด์มาร์ก",
-    description: "สถานที่สำคัญและจุดสังเกตภายในมหาวิทยาลัย",
-    thinglinkId: "",
-    x: 70,
-    y: 70,
-    icon: "fa-tree"
+    id:"welfare",
+    category:"สวัสดิการสังคม",
+    name:"งานสวัสดิการสังคม",
+    description:"จุดให้ข้อมูลและรับคำร้องเกี่ยวกับงานสวัสดิการสังคมและการช่วยเหลือประชาชน",
+    documents:"บัตรประจำตัวประชาชน\nเอกสารแสดงคุณสมบัติตามประเภทสิทธิหรือคำร้อง\nตรวจสอบเอกสารฉบับจริงกับหน่วยงาน",
+    steps:"1. แจ้งประเภทสวัสดิการที่ต้องการติดต่อ\n2. ยื่นเอกสารเพื่อให้เจ้าหน้าที่ตรวจสอบ\n3. รับคำแนะนำเกี่ยวกับการพิจารณาและติดตามผล",
+    location:"ตำแหน่ง: แก้ไขตามอาคาร/ชั้นจริง\nเวลาบริการ: ระบุเวลาทำการจริง",
+    thinglinkId:"",
+    x:72,y:72,icon:"fa-hand-holding-heart"
   }
 ];
 
 let currentScene = null;
 let fontLevel = 0;
+const fontSizes = [100,110,120,130,140];
 
-const fontSizes = [100, 110, 120, 130, 140];
+function createMenu(filter=""){
+  const menu=document.getElementById("tour-menu");
+  menu.innerHTML="";
+  const query=filter.trim().toLowerCase();
+  const matched=scenes.filter(s=>(s.name+" "+s.category+" "+s.description).toLowerCase().includes(query));
+  const categories=[...new Set(matched.map(s=>s.category))];
 
-// =====================================================
-// 2. CREATE SIDEBAR MENU
-// =====================================================
-
-function createMenu() {
-
-  const menu = document.getElementById("tour-menu");
-  menu.innerHTML = "";
-
-  const categories = [...new Set(scenes.map(s => s.category))];
-
-  categories.forEach(category => {
-
-    const heading = document.createElement("div");
-    heading.className = "category-title";
-    heading.textContent = category;
-
-    menu.appendChild(heading);
-
-    scenes.filter(s => s.category === category).forEach(scene => {
-
-      const btn = document.createElement("button");
-
-      btn.className = "tour-btn";
-      btn.dataset.id = scene.id;
-
-      const icon = document.createElement("i");
-      icon.className = "fa-solid " + scene.icon;
-
-      const text = document.createElement("span");
-      text.textContent = scene.name;
-
-      btn.append(icon, text);
-
-      btn.addEventListener("click", () => {
-        selectScene(scene.id);
-      });
-
-      menu.appendChild(btn);
-
-    });
-
-  });
-
-}
-
-// =====================================================
-// 3. CREATE INTERACTIVE MAP
-// =====================================================
-
-function createMap() {
-
-  const map = document.getElementById("map-points");
-  map.innerHTML = "";
-
-  scenes.forEach((scene, index) => {
-
-    const btn = document.createElement("button");
-
-    btn.className = "map-point";
-    btn.textContent = index + 1;
-    btn.title = scene.name;
-    btn.setAttribute("aria-label", "เลือก " + scene.name);
-
-    btn.style.left = scene.x + "%";
-    btn.style.top = scene.y + "%";
-
-    btn.addEventListener("click", () => {
-      selectScene(scene.id);
-    });
-
-    map.appendChild(btn);
-
-  });
-
-}
-
-// =====================================================
-// 4. SELECT SCENE
-// =====================================================
-
-function selectScene(sceneId) {
-
-  const scene = scenes.find(s => s.id === sceneId);
-
-  if (!scene) return;
-
-  if (!scene.thinglinkId) {
-    alert("สถานที่นี้ยังไม่ได้กำหนด ThingLink Scene ID");
+  if(!matched.length){
+    menu.innerHTML='<p class="note">ไม่พบจุดบริการที่ค้นหา</p>';
     return;
   }
 
-  currentScene = scene;
+  categories.forEach(category=>{
+    const heading=document.createElement("div");
+    heading.className="category-title";
+    heading.textContent=category;
+    menu.appendChild(heading);
 
-  // Update ThingLink Viewer
-  const frame = document.getElementById("tour-frame");
+    matched.filter(s=>s.category===category).forEach(scene=>{
+      const btn=document.createElement("button");
+      btn.className="tour-btn";
+      btn.dataset.id=scene.id;
 
-  const targetURL =
-    "https://www.thinglink.com/view/scene/" +
-    encodeURIComponent(scene.thinglinkId);
+      const icon=document.createElement("i");
+      icon.className="fa-solid "+scene.icon;
 
-  if (frame.src !== targetURL) {
-    frame.src = targetURL;
-  }
+      const label=document.createElement("span");
+      label.textContent=scene.name;
 
-  // Update title and description
-  document.getElementById("scene-title").textContent = scene.name;
-  document.getElementById("info-title").textContent = scene.name;
-  document.getElementById("info-description").textContent = scene.description;
-
-  // Update sidebar active
-  document.querySelectorAll(".tour-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.id === sceneId);
+      btn.append(icon,label);
+      btn.addEventListener("click",()=>selectScene(scene.id));
+      menu.appendChild(btn);
+    });
   });
 
-  // Update map marker
-  document.querySelectorAll(".map-point").forEach((btn, index) => {
-    btn.classList.toggle("active", scenes[index].id === sceneId);
-  });
-
+  if(currentScene){
+    document.querySelectorAll(".tour-btn").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.id===currentScene.id);
+    });
+  }
 }
 
-// =====================================================
-// 5. ACCESSIBILITY
-// =====================================================
+function createMap(){
+  const map=document.getElementById("map-points");
+  map.innerHTML="";
 
-function changeFont(direction) {
+  scenes.forEach((scene,index)=>{
+    const btn=document.createElement("button");
+    btn.className="map-point";
+    btn.textContent=index+1;
+    btn.title=scene.name;
+    btn.setAttribute("aria-label","เลือก "+scene.name);
+    btn.style.left=scene.x+"%";
+    btn.style.top=scene.y+"%";
+    btn.addEventListener("click",()=>selectScene(scene.id));
+    map.appendChild(btn);
+  });
+}
 
-  if (direction === 0) {
-    fontLevel = 0;
-  } else {
-    fontLevel = Math.max(0, Math.min(4, fontLevel + direction));
+function selectScene(sceneId){
+  const scene=scenes.find(s=>s.id===sceneId);
+  if(!scene)return;
+
+  currentScene=scene;
+
+  document.getElementById("scene-title").textContent=scene.name;
+  document.getElementById("info-title").textContent=scene.name;
+  document.getElementById("info-description").textContent=scene.description;
+  document.getElementById("info-documents").textContent=scene.documents;
+  document.getElementById("info-steps").textContent=scene.steps;
+  document.getElementById("info-location").textContent=scene.location;
+
+  const frame=document.getElementById("tour-frame");
+  const placeholder=document.getElementById("viewer-placeholder");
+
+  if(scene.thinglinkId && scene.thinglinkId.trim()){
+    const targetURL="https://www.thinglink.com/view/scene/"+encodeURIComponent(scene.thinglinkId.trim());
+    if(frame.src!==targetURL)frame.src=targetURL;
+    frame.style.display="block";
+    placeholder.style.display="none";
+  }else{
+    frame.removeAttribute("src");
+    frame.style.display="none";
+    placeholder.style.display="flex";
+    placeholder.querySelector("p").textContent="จุดบริการนี้ยังไม่ได้กำหนด ThingLink Scene ID กรุณาใส่รหัส Scene จริงในตัวแปร thinglinkId ของจุดบริการนี้";
   }
 
-  document.documentElement.style.fontSize =
-    fontSizes[fontLevel] + "%";
-
+  document.querySelectorAll(".tour-btn").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.id===sceneId);
+  });
+  document.querySelectorAll(".map-point").forEach((btn,index)=>{
+    btn.classList.toggle("active",scenes[index].id===sceneId);
+  });
 }
 
-function toggleContrast() {
-
-  const enabled = document.body.classList.toggle("high-contrast");
-
-  const button = document.getElementById("contrastBtn");
-
-  button.setAttribute("aria-pressed", enabled);
-
-  button.innerHTML = enabled
-    ? '<i class="fa-solid fa-sun"></i> ปิดโหมดคมชัดสูง'
-    : '<i class="fa-solid fa-circle-half-stroke"></i> เพิ่มความคมชัด';
-
+function changeFont(direction){
+  fontLevel=direction===0?0:Math.max(0,Math.min(4,fontLevel+direction));
+  document.documentElement.style.fontSize=fontSizes[fontLevel]+"%";
 }
 
-// =====================================================
-// 6. INITIALIZE
-// =====================================================
+function toggleContrast(){
+  const enabled=document.body.classList.toggle("high-contrast");
+  const button=document.getElementById("contrastBtn");
+  button.setAttribute("aria-pressed",enabled);
+  button.innerHTML=enabled
+    ?'<i class="fa-solid fa-sun"></i> ปิดโหมดคมชัดสูง'
+    :'<i class="fa-solid fa-circle-half-stroke"></i> เพิ่มความคมชัด';
+}
+
+document.getElementById("service-search").addEventListener("input",event=>{
+  createMenu(event.target.value);
+});
 
 createMenu();
 createMap();
-selectScene("start");
-
+selectScene("information");
 </script>
-
 </body>
 </html>
