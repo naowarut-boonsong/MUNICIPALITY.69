@@ -1,2 +1,1075 @@
-# MUNICIPALITY.69
-เทศบาลเมืองศรีสะเกษ
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Tour 360° มหาวิทยาลัยราชภัฏศรีสะเกษ</title>
+ 
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+ 
+    <style>
+        :root {
+            --primary-color: #c59d2f;
+            --primary-hover: #a88420;
+            --primary-light: rgba(197,157,47,.15);
+            --bg-color: #0b1329;
+            --card-bg: rgba(18, 28, 56, 0.85);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-color: #ffffff;
+            --text-muted: #94a3b8;
+            --nav-bg: rgba(11, 19, 41, 0.85);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s ease;
+        }
+ 
+        [data-theme="light"] {
+            --primary-color: #c59d2f;
+            --primary-hover: #a88420;
+            --primary-light: rgba(197,157,47,.15);
+            --bg-color: #fffdf7;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #f2e3ad;
+            --nav-bg: rgba(255, 253, 247, 0.85);
+            --shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 25px -5px rgba(197,157,47,0.25);
+        }
+ 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+ 
+        html {
+            scroll-behavior: smooth;
+        }
+ 
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+ 
+        .container {
+            max-width: 1140px;
+            margin: auto;
+            padding: 0 24px;
+        }
+ 
+        /* Scroll bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(to right, #2563eb, #fbbf24);
+            z-index: 2000;
+            transition: width 0.1s ease;
+        }
+ 
+        /* ================= HEADER ================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+ 
+        .nav-container {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+ 
+        .logo {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+ 
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
+ 
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+ 
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+        }
+ 
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: .3s;
+        }
+ 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+ 
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+ 
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+ 
+        .theme-toggle,
+        .menu-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .3s;
+        }
+ 
+        .theme-toggle:hover,
+        .menu-btn:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+        }
+ 
+        .menu-btn {
+            display: none;
+        }
+ 
+        /* ================= HERO ================= */
+        .hero {
+            min-height: 100vh;
+            padding: 150px 0 80px;
+            display: flex;
+            align-items: center;
+            background-image: linear-gradient(rgba(11, 19, 41, 0.8), rgba(11, 19, 41, 0.8)), url('university-bg.jpg');
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #ffffff;
+        }
+ 
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 70px;
+            width: 100%;
+        }
+ 
+        .hero-text {
+            flex: 1;
+        }
+ 
+        .hero-text .tag {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: .9rem;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--border-color);
+        }
+ 
+        .hero-text h1 {
+            font-size: 3.2rem;
+            line-height: 1.25;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+ 
+        .hero-text h1 span {
+            background: linear-gradient(135deg, #60a5fa, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+ 
+        .hero-text p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+ 
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+ 
+        .btn {
+            padding: 12px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            transition: .3s;
+            font-weight: 500;
+        }
+ 
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+ 
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+        }
+ 
+        .btn-secondary {
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+        }
+ 
+        .btn-secondary:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+ 
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+ 
+        .hero-logo-img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+ 
+        .hero-logo-img:hover {
+            transform: scale(1.03);
+        }
+ 
+        /* ================= SECTIONS ================= */
+        section {
+            padding: 90px 0;
+        }
+ 
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+ 
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+ 
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+ 
+        .section-header::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: #fbbf24;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+ 
+        /* ================= SERVICES ================= */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            align-items: stretch;
+        }
+ 
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 35px 28px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(96, 165, 250, 0.4);
+            box-shadow: var(--shadow-hover);
+        }
+ 
+        .card-header-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+ 
+        .card-icon-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-icon-btn:hover {
+            transform: scale(1.1);
+        }
+ 
+        .card-icon-blue {
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        .card-icon-blue:hover {
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+        }
+ 
+        .card-icon-yellow {
+            background: linear-gradient(135deg, #d97706, #fbbf24);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4);
+        }
+
+        .card-icon-yellow:hover {
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.6);
+        }
+ 
+        .card-title-group h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-color);
+            line-height: 1.3;
+        }
+ 
+        .card-subtitle {
+            font-size: 0.82rem;
+            color: #64748b;
+            font-weight: 400;
+        }
+ 
+        .card-divider {
+            width: 40px;
+            height: 3px;
+            border-radius: 2px;
+            margin: 12px auto 18px auto;
+        }
+ 
+        .card-divider-blue { background: #3b82f6; }
+        .card-divider-yellow { background: #fbbf24; }
+ 
+        .card-body {
+            flex-grow: 1;
+            text-align: center;
+        }
+ 
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+ 
+        .card details {
+            margin-top: 10px;
+        }
+ 
+        .card details summary {
+            display: none;
+        }
+ 
+        .details-content {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            text-align: left;
+        }
+ 
+        .details-content ul {
+            padding-left: 18px;
+        }
+ 
+        .details-content li {
+            margin-bottom: 6px;
+        }
+
+        .info-section-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        .map-info-list {
+            list-style: none !important;
+            padding-left: 0 !important;
+        }
+
+        .map-info-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .map-info-list li i {
+            margin-top: 4px;
+            color: var(--primary-color);
+            width: 16px;
+            text-align: center;
+        }
+ 
+        /* ================= PORTFOLIO ================= */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+ 
+        .portfolio-card {
+            overflow: hidden;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: .3s;
+        }
+ 
+        .portfolio-card:hover {
+            transform: translateY(-7px);
+            box-shadow: var(--shadow-hover);
+        }
+ 
+        /* ================= ABOUT ================= */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+ 
+        .about-box {
+            padding: 35px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+ 
+        .about-box p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+ 
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+ 
+        .skill {
+            padding: 8px 14px;
+            border-radius: 20px;
+            background: var(--primary-light);
+            color: var(--primary-color);
+            font-size: .85rem;
+        }
+ 
+        /* ================= CONTACT ================= */
+        .contact-box {
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+            padding: 45px;
+            border-radius: 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+ 
+        .contact-box p {
+            color: var(--text-muted);
+            margin: 10px 0;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+ 
+        .socials a {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: .3s;
+            background: rgba(255, 255, 255, 0.05);
+        }
+ 
+        .socials a:hover {
+            color: white;
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+        }
+ 
+        /* ================= FOOTER ================= */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: .9rem;
+        }
+ 
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 992px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+            }
+        }
+ 
+        @media (max-width: 850px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: .4s;
+                border-bottom: 1px solid transparent;
+            }
+ 
+            .nav-links.active {
+                max-height: 400px;
+                border-color: var(--border-color);
+            }
+ 
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+ 
+            .nav-links a {
+                display: block;
+                padding: 15px;
+            }
+ 
+            .menu-btn {
+                display: flex;
+            }
+ 
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+ 
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+ 
+            .btn-group {
+                justify-content: center;
+            }
+ 
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+ 
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
+ 
+            .hero-logo-img {
+                max-width: 220px;
+            }
+        }
+ 
+        @media (max-width: 768px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+ 
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 18px;
+            }
+ 
+            .hero {
+                padding-top: 120px;
+            }
+ 
+            section {
+                padding: 70px 0;
+            }
+ 
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+ 
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+ 
+            .contact-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+ 
+<body>
+ 
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+ 
+    <!-- ================= HEADER ================= -->
+    <header>
+        <div class="container nav-container">
+            <a href="#home" class="logo">
+                <img src="logo.png" alt="SSKRU Logo" class="logo-img">
+                SSKRU Virtual Tour
+            </a>
+ 
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">หน้าแรก</a></li>
+                    <li><a href="#services">คุณสมบัติ</a></li>
+                    <li><a href="#portfolio">Virtual Tour</a></li>
+                    <li><a href="#about">ผู้จัดทำ</a></li>
+                    <li><a href="#contact">ติดต่อ</a></li>
+                </ul>
+            </nav>
+ 
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-sun" id="themeIcon"></i>
+                </button>
+ 
+                <button class="menu-btn" id="menuBtn" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+ 
+    <!-- ================= HERO ================= -->
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <span class="tag">
+                            <i class="fa-solid fa-hand-sparkles"></i>
+                            Virtual Tour 360°
+                        </span>
+                        <h1>
+                            มหาวิทยาลัยราชภัฏศรีสะเกษ<br>
+                            <span>Virtual Tour 360°</span>
+                        </h1>
+                        <p>
+                            สื่อทัวร์เสมือนจริง 360 องศา เพื่อแนะนำอาคาร สถานที่สำคัญ และเส้นทางภายใน
+                            มหาวิทยาลัยราชภัฏศรีสะเกษ ผ่านแพลตฟอร์ม ThingLink
+                        </p>
+                        <div class="btn-group">
+                            <a href="#portfolio" class="btn btn-primary">
+                                <i class="fa-solid fa-folder-open"></i>
+                                เริ่มชม Virtual Tour
+                            </a>
+                            <a href="#contact" class="btn btn-secondary">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                ติดต่อเรา
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="logo.png" alt="ตรามหาวิทยาลัยราชภัฏศรีสะเกษ" class="hero-logo-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <!-- ================= SERVICES ================= -->
+        <section id="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2>คุณสมบัติของระบบ</h2>
+                    <p>จุดเด่นของสื่อ Virtual Tour 360 องศา (กดที่ไอคอนทรงกลมเพื่อดูรายละเอียดเพิ่มเติม)</p>
+                </div>
+ 
+                <div class="grid-3">
+                    <!-- Card 1: วิธีการใช้งาน -->
+                    <div class="card">
+                        <div class="card-header-flex">
+                            <button class="card-icon-btn card-icon-blue" onclick="toggleDetails('details-1')" title="คลิกเพื่ออ่านเพิ่มเติม">
+                                <i class="fa-solid fa-info"></i>
+                            </button>
+                            <div class="card-title-group">
+                                <h3>วิธีการใช้งาน</h3>
+                                <span class="card-subtitle">Virtual Tour 360 องศา</span>
+                            </div>
+                        </div>
+ 
+                        <div class="card-divider card-divider-blue"></div>
+ 
+                        <div class="card-body">
+                            <p>
+                                คลิก "เริ่มชม Virtual Tour" หรือเลือกสถานที่ที่ต้องการ จากนั้นลากเมาส์/นิ้ว ซูมเข้า-ออก และใช้ Transit Tag / Text & Media Tag เพื่อดูข้อมูลเพิ่มเติม
+                            </p>
+                            <details id="details-1">
+                                <summary></summary>
+                                <div class="details-content">
+                                    <ul>
+                                        <li>เลือกสถานที่ตั้งต้นบนแผนที่</li>
+                                        <li>ลากเพื่อดูมุมมองแบบ panoramic</li>
+                                        <li>กดปุ่มไอคอนเพื่อเปิดดูสื่อมัลติมีเดีย</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+ 
+                    <!-- Card 2: สัญลักษณ์และจุดสำคัญ (อัปเดตข้อมูลใหม่ตามแจ้ง) -->
+                    <div class="card">
+                        <div class="card-header-flex">
+                            <button class="card-icon-btn card-icon-yellow" onclick="toggleDetails('details-2')" title="คลิกเพื่ออ่านเพิ่มเติม">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </button>
+                            <div class="card-title-group">
+                                <h3>สัญลักษณ์และจุดสำคัญ</h3>
+                                <span class="card-subtitle">ข้อมูลแผนผังภายในมหาวิทยาลัย</span>
+                            </div>
+                        </div>
+ 
+                        <div class="card-divider card-divider-yellow"></div>
+ 
+                        <div class="card-body">
+                            <p>
+                                แสดงตำแหน่งอาคารสำคัญ สัญลักษณ์โซนพื้นที่ และไอคอนประเภทสิ่งอำนวยความสะดวกต่าง ๆ ในแผนผัง
+                            </p>
+                            <details id="details-2">
+                                <summary></summary>
+                                <div class="details-content">
+                                    <div class="info-section-title">อาคารที่มีหมายเลขระบุ:</div>
+                                    <ul class="map-info-list">
+                                        <li><i class="fa-solid fa-building"></i> <strong>หมายเลข 1:</strong> อาคาร 1 วิทยาลัยกฎหมายและการปกครอง</li>
+                                        <li><i class="fa-solid fa-building"></i> <strong>หมายเลข 3:</strong> อาคาร 3 ศูนย์ภาษา</li>
+                                        <li><i class="fa-solid fa-building"></i> <strong>หมายเลข 4:</strong> อาคาร 4 อาคารพัชรกิติยาภา คณะศิลปศาสตร์และวิทยาศาสตร์</li>
+                                        <li><i class="fa-solid fa-building"></i> <strong>หมายเลข 5:</strong> อาคาร 5 อาคารเฉลิมพระเกียรติ 80 พรรษา คณะครุศาสตร์และการพัฒนามนุษย์</li>
+                                        <li><i class="fa-solid fa-building"></i> <strong>หมายเลข 7:</strong> อาคาร 7 อาคารพัชรกิติยาภา คณะมนุษยศาสตร์และสังคมศาสตร์</li>
+                                        <li><i class="fa-solid fa-building"></i> <strong>หมายเลข 8:</strong> อาคาร 8 คณะบริหารและการบัญชี</li>
+                                        <li><i class="fa-solid fa-building"></i> <strong>หมายเลข 9:</strong> อาคาร 9 สำนักงานอธิการบดี</li>
+                                    </ul>
+
+                                    <div class="info-section-title">สัญลักษณ์ภาษาอังกฤษ:</div>
+                                    <ul class="map-info-list">
+                                        <li><i class="fa-solid fa-layer-group"></i> <strong>A:</strong> ตึกสาขาเทคโนโลยีและการเกษตร</li>
+                                        <li><i class="fa-solid fa-layer-group"></i> <strong>F:</strong> ตึกสาขาเทคโนโลยีและนวัตกรรมอาหาร</li>
+                                        <li><i class="fa-solid fa-gopuram"></i> <strong>T:</strong> ศาลประจำมหาวิทยาลัย / หอพระ</li>
+                                    </ul>
+
+                                    <div class="info-section-title">สัญลักษณ์ไอคอนแสดงประเภทอาคารและสิ่งอำนวยความสะดวก:</div>
+                                    <ul class="map-info-list">
+                                        <li><i class="fa-solid fa-graduation-cap"></i> <strong>หมวกปริญญา:</strong> โรงเรียนสาธิตมหาวิทยาลัยราชภัฏศรีสะเกษ</li>
+                                        <li><i class="fa-solid fa-user-nurse"></i> <strong>ตึกคณะพยาบาลศาสตร์:</strong> อาคารคณะพยาบาลศาสตร์</li>
+                                        <li><i class="fa-solid fa-book"></i> <strong>หนังสือ/หอสมุด:</strong> สำนักวิทยบริการและเทคโนโลยีสารสนเทศ (หอสมุดกลาง)</li>
+                                        <li><i class="fa-solid fa-landmark"></i> <strong>อาคาร/เสาโรมัน:</strong> ศูนย์ศิลปะและวัฒนธรรม</li>
+                                        <li><i class="fa-solid fa-utensils"></i> <strong>ช้อนส้อม:</strong> ศูนย์อาหาร</li>
+                                        <li><i class="fa-solid fa-music"></i> <strong>ตัวโน้ต:</strong> อาคารดนตรี</li>
+                                        <li><i class="fa-solid fa-basketball-ball"></i> <strong>บาสเกตบอล & ลู่วิ่ง/สนามฟุตบอล:</strong> สนามกีฬาอเนกประสงค์, อาคารพลศึกษา และสนามสเตเดียม</li>
+                                        <li><i class="fa-solid fa-car"></i> <strong>รถยนต์ & รถจักรยานยนต์:</strong> จุดจอดรถ</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+ 
+                    <!-- Card 3: รองรับทุกอุปกรณ์ -->
+                    <div class="card">
+                        <div class="card-header-flex">
+                            <button class="card-icon-btn card-icon-blue" onclick="toggleDetails('details-3')" title="คลิกเพื่ออ่านเพิ่มเติม">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                            </button>
+                            <div class="card-title-group">
+                                <h3>รองรับทุกอุปกรณ์</h3>
+                                <span class="card-subtitle">Virtual Tour 360 องศา</span>
+                            </div>
+                        </div>
+ 
+                        <div class="card-divider card-divider-blue"></div>
+ 
+                        <div class="card-body">
+                            <p>
+                                สามารถใช้งานผ่านคอมพิวเตอร์ แท็บเล็ต และสมาร์ตโฟน
+                            </p>
+                            <details id="details-3">
+                                <summary></summary>
+                                <div class="details-content">
+                                    <ul>
+                                        <li>รองรับ iOS, Android, Windows, macOS</li>
+                                        <li>แสดงผลสวยงามบนทุกขนาดหน้าจอ (Responsive)</li>
+                                    </ul>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+ 
+        <!-- ================= PORTFOLIO ================= -->
+        <section id="portfolio">  
+            <div class="section-header">
+                <h2>Virtual Tour 360°</h2>
+                <p>สำรวจมหาวิทยาลัยราชภัฏศรีสะเกษแบบ 360 องศา</p>
+            </div>
+            <div style="display: flex; justify-content: center; width: 100%;">
+                <iframe
+                    width="960"
+                    height="540"
+                    data-original-width="1920"
+                    data-original-height="1080"
+                    src="https://www.thinglink.com/view/scene/2157062321090855780"
+                    title="Sisaket Rajabhat University"
+                    type="text/html"
+                    style="border: none; max-width: 100%;"
+                    webkitallowfullscreen
+                    mozallowfullscreen
+                    allowfullscreen
+                    scrolling="no">
+                </iframe>
+            </div>
+        </section>
+ 
+        <script async src="//cdn.thinglink.me/jse/responsive.js"></script>
+ 
+        <!-- ================= ABOUT ================= -->
+        <section id="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>เกี่ยวกับเรา</h2>
+                    <p>ข้อมูลผู้จัดทำและเทคโนโลยีที่ใช้พัฒนา</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-box">
+                        <h2>ข้อมูลผู้จัดทำ</h2>
+                        <p style="margin-bottom: 10px; color: var(--text-muted);">
+                            โครงการพัฒนาสื่อทัวร์เสมือนจริง 360 องศา มหาวิทยาลัยราชภัฏศรีสะเกษ
+                        </p>
+                        <p>
+                            นางสาวสุพรรษา โพธิ์เจริญ<br>
+                            นางสาวเนาวรัตน์ บุญส่ง<br>
+                            มหาวิทยาลัยราชภัฏศรีสะเกษ
+                        </p>
+                        <div class="skills">
+                            <span class="skill">Virtual Tour</span>
+                            <span class="skill">ThingLink</span>
+                            <span class="skill">360° Panorama</span>
+                            <span class="skill">Web Development</span>
+                        </div>
+                    </div>
+                    <div class="about-box">
+                        <h2>เทคโนโลยีที่ใช้ในการพัฒนา</h2>
+
+                        <div class="skills">
+                            <span class="skill">Insta360 X4</span>
+                            <span class="skill">Insta360 Studio</span>
+                            <span class="skill">Adobe Photoshop</span>
+                            <span class="skill">ThingLink</span>
+                            <span class="skill">HTML5</span>
+                            <span class="skill">CSS3</span>
+                            <span class="skill">JavaScript</span>
+                            <span class="skill">GitHub Pages</span>
+                        </div>
+
+                        <p style="margin-top:20px;">
+                            ใช้สำหรับการถ่ายภาพ 360 องศา การปรับแต่งภาพ การพัฒนาหน้าเว็บไซต์
+                            และการเผยแพร่สื่อทัวร์เสมือนจริงผ่านระบบออนไลน์
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTACT ================= -->
+        <section id="contact">
+            <div class="container">
+                <div class="contact-box">
+                    <h2>ติดต่อเรา</h2>
+                    <p><strong>มหาวิทยาลัยราชภัฏศรีสะเกษ</strong></p>
+                    <p>เลขที่ 319 หมู่ 8 ตำบลโพธิ์ อำเภอเมืองศรีสะเกษ จังหวัดศรีสะเกษ 33000</p>
+                    <p>โทรศัพท์ : 045-617-677</p>
+
+                    <div class="socials">
+                        <a href="https://www.facebook.com/sskruconnect?locale=th_TH"
+                           target="_blank"
+                           aria-label="Facebook"
+                           title="Facebook มหาวิทยาลัย">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+
+                        <a href="https://www.sskru.ac.th/"
+                           target="_blank"
+                           aria-label="Website"
+                           title="เว็บไซต์มหาวิทยาลัย">
+                            <i class="fa-solid fa-globe"></i>
+                        </a>
+
+                        <a href="mailto:webmaster@sskru.ac.th"
+                           aria-label="Email"
+                           title="ส่งอีเมล">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SSKRU Virtual Tour 360°. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript สำหรับระบบเปลี่ยนธีม Toggle และ Scroll Progress -->
+    <script>
+        // Toggle details
+        function toggleDetails(id) {
+            const details = document.getElementById(id);
+            if (details) {
+                details.open = !details.open;
+            }
+        }
+
+        // Scroll Progress Bar
+        window.onscroll = function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const progressBar = document.getElementById("scrollProgress");
+            if (progressBar) {
+                progressBar.style.width = scrolled + "%";
+            }
+        };
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        if (menuBtn && navLinks) {
+            menuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Dark / Light Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        if (themeToggle && themeIcon) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'light') {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
